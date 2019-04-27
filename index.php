@@ -1,38 +1,17 @@
 <?php 
+require 'functions.php';
 
-
-class Task
-{
-	public $description;
-
-	protected $completed = false;
-
-	public function __construct($description)
-	{	
-		$this->description = $description;
-	}
-
-	public function complete() 
-	{
-		$this->completed = true;
-	}
-
-	public function isComplete() 
-	{
-		return $this->completed;
-	}
-
+try {
+	$pdo = new PDO('mysql:host=127.0.0.1;dbname=mytodo', 'prakhar', '');
+} catch(PDOException $e) {
+	die($e->getMessage());
 }
 
+$statement = $pdo->prepare('select * from todos');
 
+$statement->execute();
 
-$tasks = [
-	new Task('Go to the store'),
-	new Task('Finish my screencast'),
-	new Task('Clean my room')
-];
-
-$tasks[0]->complete();
-
+// Generally little careful about it, fetch
+$tasks = $statement->fetchAll(PDO::FETCH_OBJ);
 
 require 'index.view.php';
