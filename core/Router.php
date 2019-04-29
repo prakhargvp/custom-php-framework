@@ -5,6 +5,15 @@ class Router
 
 	protected $routes = [];
 
+	public static function load($file) 
+	{
+		$router = new static; // self
+
+		require $file;
+		
+		return $router;
+	}
+
 	public function define($routes) 
 	{
 		$this->routes = $routes;
