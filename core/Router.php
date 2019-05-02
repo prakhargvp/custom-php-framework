@@ -1,5 +1,8 @@
 <?php
 
+namespace Core;
+
+
 class Router 
 {
 
@@ -41,7 +44,9 @@ class Router
 
 	protected function callAction($controller, $action)
 	{
+		$controller = "App\\Controllers\\{$controller}";
 		$Controller = new $controller;
+
 		if (! method_exists($Controller, $action)) {
 			throw new Exception(
 				"{$controller} does not respond to the {$action} action."
