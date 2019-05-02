@@ -1,5 +1,8 @@
 <?php
 
+namespace Core;
+
+
 class Request 
 {
 	public static function uri()
